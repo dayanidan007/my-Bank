@@ -4,7 +4,6 @@ const accountRouter = require('../bank/server/routes/AccountApi')
 const managerRouter = require('../bank/server/routes/ManagerApi')
 const loanRouter = require('../bank/server/routes/LoanApi')
 const mongoose = require('mongoose')
-const Manager = require('./server/model/ManagerModel')
 
 mongoose.connect('mongodb://localhost/my-bank').then(() => {
     console.log("Connected to Database");

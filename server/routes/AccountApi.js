@@ -3,12 +3,23 @@ const router = express.Router()
 const Account = require('../model/AccountModel')
 const Manager = require('../model/ManagerModel')
 
+router.get('/account/:id', async function (req, res) {
+    const accountID = req.params.id
+    try {
+        const account = await Account.findById(accountID).populate('manager').populate('loan')
+        console.log(account)
+        res.send(account)
+    } catch (error) {
+        res.send(error)
+    }
+})
+
 router.post('/account/register', async function (req, res) {
     const managerID = req.body
     const account = new Account({ ...req.body })
     try {
         await account.save
-        const manager = await Manager.findByIdAndUpdate({_id:managerID},{ $push: { accounts: account } }, { new: true, useFindAndModify: false }).populate('accounts')
+        const manager = await Manager.findByIdAndUpdate({ _id: managerID }, { $push: { accounts: account } }, { new: true, useFindAndModify: false }).populate('accounts')
         res.send(manager)
     } catch (error) {
         res.send(error)

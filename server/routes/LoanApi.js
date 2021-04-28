@@ -4,6 +4,7 @@ const Loan = require('../model/LoansModel')
 const Account = require('../model/AccountModel')
 const Manager = require('../model/ManagerModel')
 
+
 router.post('/account/loan', async function (req, res) {
     const { accountNumber } = req.body
     const { ManagerID } = req.body
